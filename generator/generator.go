@@ -416,6 +416,9 @@ func (g *GenVisitor) VisitIdentifier(n *ast.Identifier) {
 }
 
 func (g *GenVisitor) VisitIfStatement(n *ast.IfStatement) {
+	if n == nil || n.Test == nil || n.Test.Expr == nil {
+		return
+	}
 	g.out.WriteString("if (")
 	g.gen(n.Test.Expr)
 	g.out.WriteString(") ")
