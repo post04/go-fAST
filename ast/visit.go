@@ -609,6 +609,9 @@ func (n *FunctionLiteral) VisitWith(v Visitor) {
 	v.VisitFunctionLiteral(n)
 }
 func (n *FunctionLiteral) VisitChildrenWith(v Visitor) {
+	if n == nil {
+		return
+	}
 	if n.Name != nil {
 		n.Name.VisitWith(v)
 	}
