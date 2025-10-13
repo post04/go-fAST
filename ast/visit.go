@@ -800,6 +800,9 @@ func (n *Statement) VisitWith(v Visitor) {
 	v.VisitStatement(n)
 }
 func (n *Statement) VisitChildrenWith(v Visitor) {
+	if n == nil || n.Stmt == nil {
+		return
+	}
 	if n.Stmt != nil {
 		n.Stmt.VisitWith(v)
 	}
