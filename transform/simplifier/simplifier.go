@@ -1,4 +1,4 @@
-package simplifier
+﻿package simplifier
 
 import (
 	"fmt"
@@ -9,12 +9,12 @@ import (
 	"unicode/utf16"
 	"unicode/utf8"
 
-	"github.com/t14raptor/go-fast/resolver"
+	"github.com/post04/go-fast/resolver"
 
 	"github.com/nukilabs/unicodeid"
-	"github.com/t14raptor/go-fast/ast"
-	"github.com/t14raptor/go-fast/ast/ext"
-	"github.com/t14raptor/go-fast/token"
+	"github.com/post04/go-fast/ast"
+	"github.com/post04/go-fast/ast/ext"
+	"github.com/post04/go-fast/token"
 )
 
 var asciiStart, asciiContinue [128]bool

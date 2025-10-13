@@ -1,6 +1,6 @@
-package ast
+﻿package ast
 
-import "github.com/t14raptor/go-fast/token"
+import "github.com/post04/go-fast/token"
 
 type (
 	FunctionDeclaration struct {

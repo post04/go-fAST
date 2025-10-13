@@ -1,10 +1,10 @@
-package parser
+﻿package parser
 
 import (
 	"errors"
 	"fmt"
 
-	"github.com/t14raptor/go-fast/token"
+	"github.com/post04/go-fast/token"
 )
 
 const (

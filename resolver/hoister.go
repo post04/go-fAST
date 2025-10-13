@@ -1,10 +1,10 @@
-package resolver
+﻿package resolver
 
 import (
 	"maps"
 
-	"github.com/t14raptor/go-fast/ast"
-	"github.com/t14raptor/go-fast/token"
+	"github.com/post04/go-fast/ast"
+	"github.com/post04/go-fast/token"
 )
 
 type hoister struct {

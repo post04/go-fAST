@@ -1,13 +1,13 @@
-package simplifier
+﻿package simplifier
 
 import (
 	"slices"
 	"strings"
 	"unicode/utf16"
 
-	"github.com/t14raptor/go-fast/ast"
-	"github.com/t14raptor/go-fast/ast/ext"
-	"github.com/t14raptor/go-fast/token"
+	"github.com/post04/go-fast/ast"
+	"github.com/post04/go-fast/ast/ext"
+	"github.com/post04/go-fast/token"
 )
 
 func isNonObj(n *ast.Expression) bool {

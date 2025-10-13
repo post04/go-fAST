@@ -1,6 +1,6 @@
-package deadcode
+﻿package deadcode
 
-import "github.com/t14raptor/go-fast/ast"
+import "github.com/post04/go-fast/ast"
 
 type bindingCollector struct {
 	ast.NoopVisitor

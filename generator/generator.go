@@ -1,4 +1,4 @@
-package generator
+﻿package generator
 
 import (
 	"math"
@@ -6,8 +6,8 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/t14raptor/go-fast/ast"
-	"github.com/t14raptor/go-fast/token"
+	"github.com/post04/go-fast/ast"
+	"github.com/post04/go-fast/token"
 )
 
 func Generate(node ast.VisitableNode) string {
@@ -295,6 +295,9 @@ func (g *GenVisitor) VisitEmptyStatement(n *ast.EmptyStatement) {
 }
 
 func (g *GenVisitor) VisitExpressionStatement(n *ast.ExpressionStatement) {
+	if n.Expression == nil {
+		return
+	}
 	g.gen(n.Expression.Expr)
 	g.out.WriteString(";")
 	if len(n.Comment) > 0 {

@@ -1,9 +1,9 @@
-package parser_test
+﻿package parser_test
 
 import (
 	"testing"
 
-	"github.com/t14raptor/go-fast/parser"
+	"github.com/post04/go-fast/parser"
 )
 
 func TestIssue26(t *testing.T) {

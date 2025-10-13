@@ -1,13 +1,13 @@
-package deadcode_test
+﻿package deadcode_test
 
 import (
 	"regexp"
 	"strings"
 	"testing"
 
-	"github.com/t14raptor/go-fast/generator"
-	"github.com/t14raptor/go-fast/parser"
-	"github.com/t14raptor/go-fast/transform/deadcode"
+	"github.com/post04/go-fast/generator"
+	"github.com/post04/go-fast/parser"
+	"github.com/post04/go-fast/transform/deadcode"
 )
 
 func dce(in string) (string, error) {

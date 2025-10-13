@@ -1,4 +1,4 @@
-# go-fAST
+﻿# go-fAST
 
 `go-fAST` is a super-fast Golang library designed for parsing, transforming, and generating JavaScript Abstract Syntax Trees (ASTs). This library provides a simple and efficient way to work with JavaScript ASTs in Go, enabling developers to perform a variety of tasks including code analysis and (de)obfuscation.
 
@@ -15,7 +15,7 @@
 To use `go-fAST` in your Go project, you need to install it using `go get`:
 
 ```sh
-go get github.com/t14raptor/go-fast
+go get github.com/post04/go-fast
 ```
 
 ## Credits

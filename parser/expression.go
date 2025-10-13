@@ -1,10 +1,10 @@
-package parser
+﻿package parser
 
 import (
 	"strings"
 
-	"github.com/t14raptor/go-fast/ast"
-	"github.com/t14raptor/go-fast/token"
+	"github.com/post04/go-fast/ast"
+	"github.com/post04/go-fast/token"
 )
 
 func (p *parser) parseIdentifier() *ast.Identifier {

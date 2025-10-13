@@ -1,15 +1,15 @@
-package deadcode
+﻿package deadcode
 
 import (
 	"slices"
 	"sync/atomic"
 
-	"github.com/t14raptor/go-fast/resolver"
+	"github.com/post04/go-fast/resolver"
 
-	"github.com/t14raptor/go-fast/ast"
-	"github.com/t14raptor/go-fast/ast/ext"
-	"github.com/t14raptor/go-fast/token"
-	"github.com/t14raptor/go-fast/transform/internal/cfg"
+	"github.com/post04/go-fast/ast"
+	"github.com/post04/go-fast/ast/ext"
+	"github.com/post04/go-fast/token"
+	"github.com/post04/go-fast/transform/internal/cfg"
 )
 
 // Eliminate removes dead code from the AST.

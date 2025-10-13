@@ -1,4 +1,4 @@
-package ext
+﻿package ext
 
 import (
 	"math"
@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/t14raptor/go-fast/ast"
-	"github.com/t14raptor/go-fast/token"
+	"github.com/post04/go-fast/ast"
+	"github.com/post04/go-fast/token"
 )
 
 // classHasSideEffect returns true if the class may have side effects.

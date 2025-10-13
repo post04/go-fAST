@@ -1,8 +1,8 @@
-package deadcode
+﻿package deadcode
 
 import (
-	"github.com/t14raptor/go-fast/ast"
-	"github.com/t14raptor/go-fast/token"
+	"github.com/post04/go-fast/ast"
+	"github.com/post04/go-fast/token"
 )
 
 type scopeKind int

@@ -1,11 +1,11 @@
-package deadcode
+﻿package deadcode
 
 import (
 	"slices"
 
-	"github.com/t14raptor/go-fast/transform/internal/cfg"
+	"github.com/post04/go-fast/transform/internal/cfg"
 
-	"github.com/t14raptor/go-fast/ast"
+	"github.com/post04/go-fast/ast"
 )
 
 type varInfo struct {
