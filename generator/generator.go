@@ -391,6 +391,9 @@ func (g *GenVisitor) VisitParameterList(n *ast.ParameterList) {
 }
 
 func (g *GenVisitor) VisitFunctionLiteral(n *ast.FunctionLiteral) {
+	if n == nil {
+		return
+	}
 	if n.Async {
 		g.out.WriteString("async ")
 	}
