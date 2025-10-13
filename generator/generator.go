@@ -295,7 +295,7 @@ func (g *GenVisitor) VisitEmptyStatement(n *ast.EmptyStatement) {
 }
 
 func (g *GenVisitor) VisitExpressionStatement(n *ast.ExpressionStatement) {
-	if n.Expression == nil {
+	if n == nil || n.Expression == nil || n.Expression.Expr == nil {
 		return
 	}
 	g.gen(n.Expression.Expr)
