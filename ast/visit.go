@@ -392,7 +392,9 @@ func (n *BindingTarget) VisitWith(v Visitor) {
 	v.VisitBindingTarget(n)
 }
 func (n *BindingTarget) VisitChildrenWith(v Visitor) {
-	n.Target.VisitWith(v)
+	if n.Target != nil {
+		n.Target.VisitWith(v)
+	}
 }
 func (n *BlockStatement) VisitWith(v Visitor) {
 	v.VisitBlockStatement(n)
@@ -900,7 +902,9 @@ func (n *VariableDeclarator) VisitWith(v Visitor) {
 	v.VisitVariableDeclarator(n)
 }
 func (n *VariableDeclarator) VisitChildrenWith(v Visitor) {
-	n.Target.VisitWith(v)
+	if n.Target != nil {
+		n.Target.VisitWith(v)
+	}
 	if n.Initializer != nil {
 		n.Initializer.VisitWith(v)
 	}

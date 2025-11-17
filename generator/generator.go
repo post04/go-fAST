@@ -700,6 +700,9 @@ func (g *GenVisitor) VisitWithStatement(n *ast.WithStatement) {
 }
 
 func (g *GenVisitor) VisitVariableDeclarator(n *ast.VariableDeclarator) {
+	if n == nil || n.Target == nil || n.Target.Target == nil {
+		return
+	}
 	g.gen(n.Target)
 	if n.Initializer != nil {
 		g.out.WriteString(" = ")
@@ -721,11 +724,32 @@ func (g *GenVisitor) VisitTemplateLiteral(n *ast.TemplateLiteral) {
 }
 
 func (g *GenVisitor) VisitVariableDeclaration(n *ast.VariableDeclaration) {
+	// check if the entire list has nil targets
+	allNil := true
+	for _, b := range n.List {
+		if b.Target != nil && b.Target.Target != nil {
+			allNil = false
+			break
+		}
+	}
+	if allNil {
+		return
+	}
 	g.out.WriteString(n.Token.String())
 	g.out.WriteString(" ")
 	for i, b := range n.List {
+		if b.Target == nil || b.Target.Target == nil {
+			continue
+		}
 		g.gen(&b)
 		if i < len(n.List)-1 {
+			// if next one is nil && next one is the last one, don't write a comma
+			if i+1 >= len(n.List) {
+				continue
+			}
+			if n.List[i+1].Target == nil && i+1 == len(n.List)-1 {
+				continue
+			}
 			g.out.WriteString(", ")
 		}
 	}
