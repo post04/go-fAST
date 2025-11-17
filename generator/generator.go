@@ -750,6 +750,17 @@ func (g *GenVisitor) VisitVariableDeclaration(n *ast.VariableDeclaration) {
 			if n.List[i+1].Target == nil && i+1 == len(n.List)-1 {
 				continue
 			}
+			// or if all the next ones are nil, don't write a comma
+			allNextNil := true
+			for j := i + 1; j < len(n.List); j++ {
+				if n.List[j].Target != nil && n.List[j].Target.Target != nil {
+					allNextNil = false
+					break
+				}
+			}
+			if allNextNil {
+				continue
+			}
 			g.out.WriteString(", ")
 		}
 	}
