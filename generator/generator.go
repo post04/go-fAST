@@ -733,6 +733,7 @@ func (g *GenVisitor) VisitVariableDeclaration(n *ast.VariableDeclaration) {
 		}
 	}
 	if allNil {
+		g.out.WriteString(";")
 		return
 	}
 	g.out.WriteString(n.Token.String())
