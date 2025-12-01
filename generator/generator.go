@@ -700,7 +700,7 @@ func (g *GenVisitor) VisitWithStatement(n *ast.WithStatement) {
 }
 
 func (g *GenVisitor) VisitVariableDeclarator(n *ast.VariableDeclarator) {
-	if n == nil || n.Target == nil || n.Target.Target == nil {
+	if n == nil || n.Target == nil || n.Target.Target == nil || n.Remove {
 		return
 	}
 	g.gen(n.Target)
@@ -727,7 +727,7 @@ func (g *GenVisitor) VisitVariableDeclaration(n *ast.VariableDeclaration) {
 	// check if the entire list has nil targets
 	allNil := true
 	for _, b := range n.List {
-		if b.Target != nil && b.Target.Target != nil {
+		if b.Target != nil && b.Target.Target != nil && !b.Remove {
 			allNil = false
 			break
 		}
@@ -744,6 +744,10 @@ func (g *GenVisitor) VisitVariableDeclaration(n *ast.VariableDeclaration) {
 		}
 		g.gen(&b)
 		if i < len(n.List)-1 {
+			// if the current one is nil, don't write a comma
+			if b.Remove {
+				continue
+			}
 			// if next one is nil && next one is the last one, don't write a comma
 			if i+1 >= len(n.List) {
 				continue
@@ -754,7 +758,7 @@ func (g *GenVisitor) VisitVariableDeclaration(n *ast.VariableDeclaration) {
 			// or if all the next ones are nil, don't write a comma
 			allNextNil := true
 			for j := i + 1; j < len(n.List); j++ {
-				if n.List[j].Target != nil && n.List[j].Target.Target != nil {
+				if n.List[j].Target != nil && n.List[j].Target.Target != nil && !n.List[j].Remove {
 					allNextNil = false
 					break
 				}

@@ -23,6 +23,7 @@ type (
 	VariableDeclarator struct {
 		Target      *BindingTarget
 		Initializer *Expression `optional:"true"`
+		Remove      bool
 	}
 )
 
