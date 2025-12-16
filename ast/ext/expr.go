@@ -2,10 +2,11 @@
 
 import (
 	"fmt"
-	"github.com/post04/go-fast/resolver"
 	"math"
 	"slices"
 	"strings"
+
+	"github.com/post04/go-fast/resolver"
 
 	"github.com/nukilabs/ftoa"
 	"github.com/post04/go-fast/ast"
