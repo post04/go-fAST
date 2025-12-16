@@ -168,6 +168,7 @@ func (*Expression) _forInto()          {}
 
 func (*BadStatement) _stmt()        {}
 func (*BlockStatement) _stmt()      {}
+func (*BlockStatement) _expr()      {}
 func (*BreakStatement) _stmt()      {}
 func (*CaseStatement) _stmt()       {}
 func (*ContinueStatement) _stmt()   {}
