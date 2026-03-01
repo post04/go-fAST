@@ -733,7 +733,7 @@ func (g *GenVisitor) VisitVariableDeclaration(n *ast.VariableDeclaration) {
 		}
 	}
 	if allNil {
-		g.out.WriteString(";")
+		//g.out.WriteString(";")
 		return
 	}
 	g.out.WriteString(n.Token.String())
@@ -770,7 +770,7 @@ func (g *GenVisitor) VisitVariableDeclaration(n *ast.VariableDeclaration) {
 		}
 	}
 
-	g.out.WriteString(";")
+	//g.out.WriteString(";")
 	if len(n.Comment) > 0 {
 		g.out.WriteString(" // " + n.Comment)
 	}
