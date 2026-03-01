@@ -1,8 +1,9 @@
-package parser
+﻿package parser
 
 import (
 	"errors"
 	"fmt"
+
 	"github.com/post04/go-fast/token"
 )
 
@@ -11,38 +12,68 @@ const (
 	errUnexpectedEndOfInput = "Unexpected end of input"
 )
 
-// errorf ...
-func (p *parser) errorf(msg string, msgValues ...any) error {
-	err := fmt.Errorf(msg, msgValues...)
-	p.errors = errors.Join(p.errors, err)
-	return err
+// error ...
+func (p *parser) error(msg string, msgValues ...any) error {
+	msg = fmt.Sprintf(msg, msgValues...)
+	p.errors.Add(msg)
+	return p.errors[len(p.errors)-1]
 }
 
 // errorUnexpected ...
 func (p *parser) errorUnexpected(chr rune) error {
 	if chr == -1 {
-		return p.errorf(errUnexpectedEndOfInput)
+		return p.error(errUnexpectedEndOfInput)
 	}
-	return p.errorf(errUnexpectedToken, token.Illegal)
+	return p.error(errUnexpectedToken, token.Illegal)
 }
 
 func (p *parser) errorUnexpectedToken(tkn token.Token) error {
 	switch tkn {
 	case token.Eof:
-		return p.errorf(errUnexpectedEndOfInput)
+		return p.error(errUnexpectedEndOfInput)
+	}
+	value := tkn.String()
+	switch tkn {
 	case token.Boolean, token.Null:
-		//value = p.literal TODO
+		value = p.literal
 	case token.Identifier:
-		return p.errorf("Unexpected identifier")
+		return p.error("Unexpected identifier")
 	case token.Keyword:
 		// TODO Might be a future reserved word
-		return p.errorf("Unexpected reserved word")
+		return p.error("Unexpected reserved word")
 	case token.EscapedReservedWord:
-		return p.errorf("Keyword must not contain escaped characters")
+		return p.error("Keyword must not contain escaped characters")
 	case token.Number:
-		return p.errorf("Unexpected number")
+		return p.error("Unexpected number")
 	case token.String:
-		return p.errorf("Unexpected string")
+		return p.error("Unexpected string")
 	}
-	return p.errorf(errUnexpectedToken, tkn.String())
+	return p.error(errUnexpectedToken, value)
+}
+
+// ErrorList is a list of *Errors.
+type ErrorList []error
+
+// Add adds an Error with given position and message to an ErrorList.
+func (e *ErrorList) Add(msg string) {
+	*e = append(*e, errors.New(msg))
+}
+
+// Error implements the Error interface.
+func (e *ErrorList) Error() string {
+	switch len(*e) {
+	case 0:
+		return "no errors"
+	case 1:
+		return (*e)[0].Error()
+	}
+	return fmt.Sprintf("%s (and %d more errors)", (*e)[0].Error(), len(*e)-1)
+}
+
+// Err returns an error equivalent to this ErrorList. If the list is empty, Err returns nil.
+func (e *ErrorList) Err() error {
+	if len(*e) == 0 {
+		return nil
+	}
+	return e
 }
