@@ -1,9 +1,7 @@
 package token
 
 const (
-	Undetermined Token = iota
-
-	Skip
+	_ Token = iota
 
 	Illegal
 	Eof
@@ -40,14 +38,11 @@ const (
 	ShiftRightAssign         // >>=
 	UnsignedShiftRightAssign // >>>=
 
-	LogicalAnd       // &&
-	LogicalOr        // ||
-	Coalesce         // ??
-	LogicalAndAssign // &&=
-	LogicalOrAssign  // ||=
-	CoalesceAssign   // ??=
-	Increment        // ++
-	Decrement        // --
+	LogicalAnd // &&
+	LogicalOr  // ||
+	Coalesce   // ??
+	Increment  // ++
+	Decrement  // --
 
 	Equal       // ==
 	StrictEqual // ===
@@ -81,11 +76,6 @@ const (
 	Backtick         // `
 
 	PrivateIdentifier
-
-	TemplateHead
-	TemplateMiddle
-	TemplateTail
-	NoSubstitutionTemplate
 
 	Identifier
 	Keyword
@@ -178,9 +168,6 @@ var token2string = [...]string{
 	LogicalAnd:               "&&",
 	LogicalOr:                "||",
 	Coalesce:                 "??",
-	LogicalAndAssign:         "&&=",
-	LogicalOrAssign:          "||=",
-	CoalesceAssign:           "??=",
 	Increment:                "++",
 	Decrement:                "--",
 	Equal:                    "==",

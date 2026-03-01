@@ -5,7 +5,7 @@ import (
 )
 
 // Token is the set of lexical tokens in JavaScript (ECMA5).
-type Token byte
+type Token int
 
 // String returns the string corresponding to the token.
 func (t Token) String() string {
@@ -66,11 +66,16 @@ type keyword struct {
 	strict        bool
 }
 
-func MatchKeyword(literal string) Token {
+// LiteralKeyword returns the keyword token if literal is a keyword, a Keyword token. If the literal is a future keyword
+// (const, let, class, super, ...), or 0 if the literal is not a keyword.
+func LiteralKeyword(literal string) (Token, bool) {
 	if k, exists := keywordTable[literal]; exists {
-		return k.token
+		if k.futureKeyword {
+			return Keyword, k.strict
+		}
+		return k.token, false
 	}
-	return Identifier
+	return 0, false
 }
 
 // ID ...
