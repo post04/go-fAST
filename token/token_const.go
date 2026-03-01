@@ -94,7 +94,7 @@ const (
 
 	If
 	In
-	Of
+	OF
 	Do
 
 	Var
