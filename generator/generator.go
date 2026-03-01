@@ -71,7 +71,9 @@ func (g *GenVisitor) VisitArrayLiteral(n *ast.ArrayLiteral) {
 
 func (g *GenVisitor) VisitAssignExpression(n *ast.AssignExpression) {
 	needsParens := false
-
+	// if n == nil {
+	// 	return
+	// }
 	switch n.Left.Expr.(type) {
 	case *ast.ObjectPattern, *ast.ArrayPattern:
 		if _, ok := g.p.(*ast.ExpressionStatement); ok {
@@ -572,12 +574,35 @@ func (g *GenVisitor) VisitReturnStatement(n *ast.ReturnStatement) {
 func (g *GenVisitor) VisitSequenceExpression(n *ast.SequenceExpression) {
 	switch g.p.(type) {
 	case *ast.VariableDeclarator, *ast.PropertyKeyed, *ast.UnaryExpression, *ast.UpdateExpression, *ast.BinaryExpression, *ast.ConditionalExpression, *ast.AssignExpression, *ast.CallExpression, *ast.ArrayLiteral:
+		allNil := true
+		for _, e := range n.Sequence {
+			if e.Expr != nil {
+				allNil = false
+				break
+			}
+		}
+		if allNil {
+			return
+		}
 		g.out.WriteString("(")
 		defer g.out.WriteString(")")
 	}
 	for i, e := range n.Sequence {
+		if e.Expr == nil {
+			continue
+		}
 		g.gen(e.Expr)
 		if i < len(n.Sequence)-1 {
+			allNextNil := true
+			for j := i + 1; j < len(n.Sequence); j++ {
+				if n.Sequence[j].Expr != nil {
+					allNextNil = false
+					break
+				}
+			}
+			if allNextNil {
+				continue
+			}
 			g.out.WriteString(", ")
 		}
 	}
@@ -733,7 +758,7 @@ func (g *GenVisitor) VisitVariableDeclaration(n *ast.VariableDeclaration) {
 		}
 	}
 	if allNil {
-		//g.out.WriteString(";")
+		g.out.WriteString(";")
 		return
 	}
 	g.out.WriteString(n.Token.String())
@@ -770,7 +795,7 @@ func (g *GenVisitor) VisitVariableDeclaration(n *ast.VariableDeclaration) {
 		}
 	}
 
-	//g.out.WriteString(";")
+	g.out.WriteString(";")
 	if len(n.Comment) > 0 {
 		g.out.WriteString(" // " + n.Comment)
 	}
