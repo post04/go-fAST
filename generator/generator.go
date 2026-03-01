@@ -364,6 +364,10 @@ func (g *GenVisitor) VisitForStatement(n *ast.ForStatement) {
 func (g *GenVisitor) VisitForLoopInitializer(n *ast.ForLoopInitializer) {
 	switch init := n.Initializer.(type) {
 	case *ast.Expression:
+		if init.Expr == nil {
+			g.out.WriteString(";")
+			return
+		}
 		g.gen(init.Expr)
 		g.out.WriteString(";")
 	case *ast.VariableDeclaration:
