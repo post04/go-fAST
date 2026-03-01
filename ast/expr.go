@@ -229,6 +229,7 @@ func (*BinaryExpression) _expr()      {}
 func (*CallExpression) _expr()        {}
 func (*ConditionalExpression) _expr() {}
 func (*MemberExpression) _expr()      {}
+func (*VariableDeclarator) _expr()    {}
 func (*PrivateDotExpression) _expr()  {}
 func (*ArrowFunctionLiteral) _expr()  {}
 func (*NewExpression) _expr()         {}
